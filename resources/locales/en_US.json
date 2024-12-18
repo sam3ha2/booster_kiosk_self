@@ -1,0 +1,18 @@
+{
+  "label": "English",
+  "main": {
+    "contextMenu": {
+      "showHome": "Show Home Screen",
+      "setAppZoom": "Set App Display Scale",
+      "quit": "Quit App",
+      "nowValue": "Now",
+      "resetWindowPosition": "Reset Window Position"
+    }
+  },
+  "renderer": {
+    "updateLoading": {
+      "loading": "Downloading Update...",
+      "autoRestart": "The app will restart shortly."
+    }
+  }
+}

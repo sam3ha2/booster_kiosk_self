@@ -1,0 +1,18 @@
+{
+  "label": "한국어",
+  "main": {
+    "contextMenu": {
+      "showHome": "홈 화면 보기",
+      "setAppZoom": "앱 비율 설정",
+      "quit": "앱 끄기",
+      "nowValue": "현재값",
+      "resetWindowPosition": "창 위치 초기화"
+    }
+  },
+  "renderer": {
+    "updateLoading": {
+      "loading": "업데이트 다운로드중...",
+      "autoRestart": "잠시 후 앱이 재시작됩니다."
+    }
+  }
+}
