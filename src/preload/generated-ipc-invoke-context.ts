@@ -1,12 +1,21 @@
 import { ipcRenderer } from 'electron';
 
+import { BayController } from '@main/modules/bay/bay.controller';
 import { ConfigController } from '@main/modules/config/config.controller';
 import { DeveloperController } from '@main/modules/developer/developer.controller';
 import { ElectronController } from '@main/modules/electron/electron.controller';
 import { UpdateController } from '@main/modules/update/update.controller';
 
 export const generatedIpcInvokeContext = {
+  // BayController
+  getSiteList: async (...args: Parameters<typeof BayController.prototype.getSiteList>): Promise<ReturnType<typeof BayController.prototype.getSiteList>> => ipcRenderer.invoke('getSiteList', ...args),
+  getBoothList: async (...args: Parameters<typeof BayController.prototype.getBoothList>): Promise<ReturnType<typeof BayController.prototype.getBoothList>> => ipcRenderer.invoke('getBoothList', ...args),
+  getNodeStatus: async (...args: Parameters<typeof BayController.prototype.getNodeStatus>): Promise<ReturnType<typeof BayController.prototype.getNodeStatus>> => ipcRenderer.invoke('getNodeStatus', ...args),
+  toggleNode: async (...args: Parameters<typeof BayController.prototype.toggleNode>): Promise<ReturnType<typeof BayController.prototype.toggleNode>> => ipcRenderer.invoke('toggleNode', ...args),
+
   // ConfigController
+  getAllConfig: async (...args: Parameters<typeof ConfigController.prototype.getAllConfig>): Promise<ReturnType<typeof ConfigController.prototype.getAllConfig>> => ipcRenderer.invoke('getAllConfig', ...args),
+  setAllConfig: async (...args: Parameters<typeof ConfigController.prototype.setAllConfig>): Promise<ReturnType<typeof ConfigController.prototype.setAllConfig>> => ipcRenderer.invoke('setAllConfig', ...args),
   getConfig: async (...args: Parameters<typeof ConfigController.prototype.getConfig>): Promise<ReturnType<typeof ConfigController.prototype.getConfig>> => ipcRenderer.invoke('getConfig', ...args),
   setConfig: async (...args: Parameters<typeof ConfigController.prototype.setConfig>): Promise<ReturnType<typeof ConfigController.prototype.setConfig>> => ipcRenderer.invoke('setConfig', ...args),
 

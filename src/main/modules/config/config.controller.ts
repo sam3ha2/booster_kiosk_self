@@ -9,12 +9,22 @@ export class ConfigController {
   constructor(private readonly configService: ConfigService) {}
 
   @IPCHandle()
-  public getConfig() {
+  public getAllConfig() {
     return this.configService.getAll()
   }
 
   @IPCHandle()
-  public setConfig(config: ConfigStoreValues) {
+  public setAllConfig(config: ConfigStoreValues) {
     return this.configService.setAll(config)
+  }
+
+  @IPCHandle()
+  public getConfig(key: any) {
+    return this.configService.get(key)
+  }
+
+  @IPCHandle()
+  public setConfig(key: any, value: any) {
+    return this.configService.set(key, value)
   }
 }
