@@ -1,38 +1,100 @@
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import electronLogo from '@renderer/assets/electron.svg'
-import '@renderer/assets/main.css'
-import Versions from '@renderer/components/Versions'
+import { SettingOutlined } from '@ant-design/icons'
+import { Card, Button, List, Tag, Spin, message, Space } from 'antd'
 
-function HomePage(): JSX.Element {
+import type { BayNode } from '@main/modules/bay/types/bay.type'
+import { wait } from '@main/utils/promise.utils'
+
+function BayControlPage(): JSX.Element {
+  const navigate = useNavigate()
+  const [bayName, setBayName] = useState('')
+  const [nodes, setNodes] = useState<BayNode[]>([])
+  const [loading, setLoading] = useState(false)
+
+  const fetchNodes = async () => {
+    const settings: any = await window.electron.getConfig('settings')
+    try {
+      if (settings.mode === 'GPASS') {
+        setBayName(`${settings.gpass.siteName} - ${settings.gpass.boothName}`)
+      } else {
+        setBayName(`${settings.shopName} - ${settings.bayName}`)
+      }
+      setLoading(true)
+      const nodes = await window.electron.getNodeStatus()
+      console.log(nodes)
+      setNodes(nodes)
+    } catch (error) {
+      message.error('노드 상태 조회 실패')
+      if (
+        settings.mode === null ||
+        (settings.mode === 'GPASS' && (!settings.gpass.siteOid || !settings.gpass.boothId))
+      ) {
+        await wait(1)
+        navigate('/admin', { replace: true })
+        return
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleToggle = async (nodeId: string) => {
+    try {
+      setLoading(true)
+      await window.electron.toggleNode(nodeId)
+      await fetchNodes() // 상태 갱신
+    } catch (error) {
+      message.error('노드 상태 변경 실패')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchNodes()
+  }, [])
+
   return (
-    <>
-      <Link to="/about">About</Link>
-
-      <img alt="logo" className="logo" src={electronLogo} />
-      <div className="creator">Powered by electron-vite</div>
-      <div className="text">
-        Build an Electron app with <span className="react">React</span>
-        &nbsp;and <span className="ts">TypeScript</span>
-      </div>
-      <p className="tip">
-        Please try pressing <code>F12</code> to open the devTool
-      </p>
-      <div className="actions">
-        <div className="action">
-          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
-            Documentation
-          </a>
-        </div>
-        <div className="action">
-          <a target="_blank" rel="noreferrer" onClick={window.electron.ping}>
-            Send IPC
-          </a>
-        </div>
-      </div>
-      <Versions />
-    </>
+    <Card
+      title={bayName}
+      extra={
+        <Space>
+          <Button onClick={fetchNodes}>새로고침</Button>
+          <Button type="text" icon={<SettingOutlined />} onClick={() => navigate('/admin')} />
+        </Space>
+      }
+    >
+      <Spin spinning={loading}>
+        <List
+          grid={{ gutter: 16, column: 2 }}
+          dataSource={nodes}
+          renderItem={node => (
+            <List.Item key={node.id}>
+              <Card
+                size="small"
+                style={{
+                  border: `1px solid ${node.status ? '#1890ff' : '#d9d9d9'}`,
+                  cursor: 'pointer',
+                }}
+                onClick={() => handleToggle(node.id)}
+              >
+                <List.Item.Meta
+                  title={`${node.id} - ${node.name ?? ''}`}
+                  description={
+                    <Tag color={node.status ? 'green' : 'red'} style={{ cursor: 'pointer' }}>
+                      {node.status ? 'ON' : 'OFF'}
+                    </Tag>
+                  }
+                />
+              </Card>
+            </List.Item>
+          )}
+        />
+      </Spin>
+    </Card>
   )
 }
 
-export default HomePage
+export default BayControlPage

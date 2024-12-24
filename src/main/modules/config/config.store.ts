@@ -10,7 +10,21 @@ export interface ConfigStoreValues {
     restoreWindowPosition: boolean
     language: string | null
   }
+  settings: SettingStoreValues
 }
+
+export interface SettingStoreValues {
+  mode: BayMode | null
+  bayName: string | null
+  gpass: {
+    siteOid: string | null
+    siteName: string | null
+    boothId: string | null
+    boothName: string | null
+  } | null
+}
+
+export type BayMode = 'GPASS' | 'LOCAL'
 
 export const configStore = new Store<ConfigStoreValues>({
   name: 'config',
@@ -22,6 +36,16 @@ export const configStore = new Store<ConfigStoreValues>({
       zoom: 1.0,
       restoreWindowPosition: true,
       language: null,
+    },
+    settings: {
+      mode: null,
+      bayName: null,
+      gpass: {
+        siteOid: null,
+        siteName: null,
+        boothId: null,
+        boothName: null,
+      },
     },
   },
 })
