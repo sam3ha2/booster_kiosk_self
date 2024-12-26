@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import useSWR from 'swr'
 
-import logoImage from '@renderer/assets/electron.svg'
+import logoImage from '@renderer/assets/logo.svg'
 import '@renderer/assets/update-loading.css'
 
 const UpdateLoadingPage = () => {
