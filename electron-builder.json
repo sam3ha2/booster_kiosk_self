@@ -1,17 +1,17 @@
 {
-  "appId": "com.2skydev.example",
-  "productName": "electron-nestjs-react-vite-template",
+  "appId": "kr.co.boosteron.kiosk.self",
+  "productName": "BoosterSelfKiosk",
   "protocols": {
-    "name": "example",
+    "name": "boosteron",
     "schemes": [
-      "example"
+      "boosteron"
     ]
   },
   "publish": [
     {
       "provider": "github",
-      "owner": "2skydev",
-      "repo": "electron-nestjs-react-vite-template"
+      "owner": "sam3ha2",
+      "repo": "booster_kiosk_self"
     }
   ],
   "asar": true,
