@@ -5,6 +5,9 @@ import { Button, Card, Radio, Space, message } from 'antd'
 
 import { BayMode } from '@main/modules/config/config.store'
 
+import '@renderer/assets/admin.css'
+import Versions from '@renderer/components/Versions'
+
 import GpassSettings from '../components/GpassSettings'
 
 function AdminPage(): JSX.Element {
@@ -63,6 +66,9 @@ function AdminPage(): JSX.Element {
           </Button>
         )}
       </Space>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Versions />
+      </div>
     </div>
   )
 }
