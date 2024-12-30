@@ -16,7 +16,12 @@
   ],
   "asar": true,
   "win": {
-    "target": "nsis",
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      }
+    ],
     "icon": "resources/icons/logo@256.ico"
   },
   "mac": {
@@ -26,7 +31,9 @@
   "nsis": {
     "oneClick": true,
     "artifactName": "${productName}-${version}.${ext}",
-    "uninstallDisplayName": "${productName}"
+    "uninstallDisplayName": "${productName}",
+    "createDesktopShortcut": true,
+    "runAfterFinish": true
   },
   "extraResources": [
     "./resources/**"
