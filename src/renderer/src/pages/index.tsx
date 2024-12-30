@@ -26,7 +26,7 @@ function BayControlPage(): JSX.Element {
       console.log(nodes)
       setNodes(nodes)
     } catch (error) {
-      message.error('노드 상태 조회 실패')
+      message.error(`노드 상태 조회 실패: ${error}`)
       if (
         settings.mode === null ||
         (settings.mode === 'GPASS' && (!settings.gpass.siteOid || !settings.gpass.boothId))
