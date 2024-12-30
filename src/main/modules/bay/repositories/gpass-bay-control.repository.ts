@@ -159,7 +159,8 @@ export class GpassBayControlRepository implements IBayControlRepository {
       )
       this.updateLastCallTime()
     } catch (error) {
-      throw new Error('세션 초기화 실패')
+      const key = process.env.GPASS_DEFAULT_PUBLIC_KEY?.replace(/\\n/g, '\n') || ''
+      throw new Error(`세션 초기화 실패, ${error}, ${key}`)
     }
   }
 }
