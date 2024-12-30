@@ -36,7 +36,8 @@
     "runAfterFinish": true
   },
   "extraResources": [
-    "./resources/**"
+    "./resources/**",
+    ".env"
   ],
   "directories": {
     "output": "release/"

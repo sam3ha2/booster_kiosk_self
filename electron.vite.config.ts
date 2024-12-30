@@ -10,6 +10,9 @@ export default defineConfig(() => {
       build: {
         watch: {},
         sourcemap: true,
+        rollupOptions: {
+          external: ['electron'],
+        }
       },
       resolve: {
         alias: {

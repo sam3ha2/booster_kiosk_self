@@ -87,7 +87,6 @@ jobs:
           $decodedText = [System.Text.Encoding]::UTF8.GetString($decodedBytes)
           $decodedText | Add-Content -Path .env -Encoding UTF8
           echo "Appended to .env file"
-          cat .env
 
       - name: Install dependencies
         run: pnpm i
