@@ -79,14 +79,6 @@ jobs:
           echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> .env
           echo "MAIN_VITE_SENTRY_DSN=${{ vars.MAIN_VITE_SENTRY_DSN }}" >> .env
           echo "RENDERER_VITE_SENTRY_DSN=${{ vars.RENDERER_VITE_SENTRY_DSN }}" >> .env
-      - name: Append to .env file from secret
-        run: |
-          echo "Decoding and appending to .env file..."
-          $encodedContent = "${{ secrets.ENV_FILE }}"
-          $decodedBytes = [System.Convert]::FromBase64String($encodedContent)
-          $decodedText = [System.Text.Encoding]::UTF8.GetString($decodedBytes)
-          $decodedText | Add-Content -Path .env -Encoding UTF8
-          echo "Appended to .env file"
 
       - name: Install dependencies
         run: pnpm i
@@ -95,3 +87,8 @@ jobs:
         run: pnpm build
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }} # electron-builder은 자동 인증 토큰을 지원하지 않음
+          GPASS_API_URL: ${{ vars.GPASS_API_URL }}
+          GPASS_DEFAULT_PUBLIC_KEY: ${{ secrets.GPASS_DEFAULT_PUBLIC_KEY }}
+          GPASS_AUTH_KEY: ${{ secrets.GPASS_AUTH_KEY }}
+          GPASS_USER_ID: ${{ secrets.GPASS_USER_ID }}
+          GPASS_PASSWORD: ${{ secrets.GPASS_PASSWORD }}
