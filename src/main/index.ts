@@ -11,6 +11,8 @@ import { UpdateService } from '@main/modules/update/update.service'
 
 const bootstrap = async () => {
   try {
+    log.transports.file.level = 'debug'
+
     const app = await NestFactory.createApplicationContext(AppModule)
 
     const updateService = app.get(UpdateService)
