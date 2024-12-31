@@ -103,6 +103,7 @@ export class ElectronService implements OnModuleInit, OnApplicationBootstrap {
   @ExecuteLog()
   public async onModuleInit() {
     this.controller = this.moduleRef.get(ElectronController)
+    console.log('process.env:', JSON.stringify(process.env, null, 2))
 
     await app.whenReady()
     await this.initI18Next()
@@ -305,6 +306,7 @@ export const generatedIpcOnContext = {`
         await this.window.loadURL(this.DEV_URL + '#')
         this.window.webContents.openDevTools()
       }
+      this.window.webContents.openDevTools()
     })
   }
 
