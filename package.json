@@ -1,6 +1,6 @@
 {
   "name": "booster-self-wash-controller",
-  "version": "0.1.2",
+  "version": "0.1.1",
   "description": "부스터 셀프세차 제어 장치",
   "main": "./out/main/index.js",
   "author": {
