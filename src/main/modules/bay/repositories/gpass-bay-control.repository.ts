@@ -4,6 +4,7 @@ import { ConfigService } from '@main/modules/config/config.service'
 
 import { GpassApiService } from '../services/gpass_api_service'
 import type { IBayControlRepository, BayNode, GpassSite, GpassBooth } from '../types/bay.type'
+import log from 'electron-log'
 
 @Injectable()
 export class GpassBayControlRepository implements IBayControlRepository {
@@ -136,7 +137,7 @@ export class GpassBayControlRepository implements IBayControlRepository {
       this.updateLastCallTime()
       return true
     } catch (error) {
-      console.error(error)
+      log.error(error)
       throw new Error('노드 상태 업데이트 실패')
     }
   }

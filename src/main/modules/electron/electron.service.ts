@@ -36,6 +36,8 @@ import { electronStore } from '@main/modules/electron/electron.store'
 import { AppControlAction } from '@main/modules/electron/types/app-control.type'
 import { LanguageOption } from '@main/modules/electron/types/language.type'
 
+import log from 'electron-log'
+
 @Injectable()
 export class ElectronService implements OnModuleInit, OnApplicationBootstrap {
   private readonly store = electronStore
@@ -103,6 +105,7 @@ export class ElectronService implements OnModuleInit, OnApplicationBootstrap {
   @ExecuteLog()
   public async onModuleInit() {
     this.controller = this.moduleRef.get(ElectronController)
+    log.info('process.env:', JSON.stringify(process.env, null, 2))
 
     await app.whenReady()
     await this.initI18Next()

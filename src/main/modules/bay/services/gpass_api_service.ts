@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import axios, { AxiosInstance } from 'axios'
 import crypto from 'crypto'
 import { DOMParser } from 'xmldom'
+import log from 'electron-log'
 
 export interface GpassApiServiceInterface {
   axiosInstance: AxiosInstance
@@ -95,7 +96,7 @@ export class GpassApiService implements GpassApiServiceInterface {
 
       return encryptBuffer.toString('base64')
     } catch (error) {
-      console.error('암호화 오류:', error)
+      log.error('암호화 오류:', error)
       throw error
     }
   }
