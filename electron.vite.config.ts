@@ -16,6 +16,13 @@ export default defineConfig(() => {
           '@main': resolve('src/main'),
         },
       },
+      define: {
+        'process.env.GPASS_API_URL': JSON.stringify(process.env.GPASS_API_URL),
+        'process.env.GPASS_DEFAULT_PUBLIC_KEY': JSON.stringify(process.env.GPASS_DEFAULT_PUBLIC_KEY),
+        'process.env.GPASS_AUTH_KEY': JSON.stringify(process.env.GPASS_AUTH_KEY),
+        'process.env.GPASS_USER_ID': JSON.stringify(process.env.GPASS_USER_ID),
+        'process.env.GPASS_PASSWORD': JSON.stringify(process.env.GPASS_PASSWORD),
+      },
     },
     preload: {
       plugins: [externalizeDepsPlugin()],
